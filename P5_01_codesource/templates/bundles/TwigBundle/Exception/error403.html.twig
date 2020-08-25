@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accès interdit{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="col mt-5">
+        <h1>Accès interdit</h1>
+            <div class="alert alert-danger">
+                <p>Le contenu de cette page n'est pas autorisé</p>        
+            </div>
+        <a href="{{ path('homepage') }}" class="btn btn-primary">Retour à l'accueil</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    max-width: 128px;
+    max-height: 128px;
+}
+
+.avatar-mini {
+    min-width: 24px;
+    max-height: 24px;
+}
+
+#randomAvatar{
+    font-size: 128px;
+}
+
+#randomAvatarMini{
+    font-size: 24px;
+}
