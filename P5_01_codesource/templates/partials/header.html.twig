@@ -15,8 +15,8 @@
                 {% if app.user %}
                     <li class="nav-tem dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
-                            {% if app.user.profilePicture %}
-                                <img src="{{ app.user.profilePicture }}" class="avatar avatar-mini" alt="Photo de {{ app.user.fullName }}"> {{app.user.fullName}}
+                            {% if app.user.Picture %}
+                                <img src="{{ app.user.Picture }}" class="avatar avatar-mini" alt="Photo de {{ app.user.fullName }}"> {{app.user.fullName}}
                             {% else %}
                                 <i class="fas fa-user-circle" id="randomAvatarMini"></i> {{app.user.fullName}}
                             {% endif %}
@@ -30,6 +30,9 @@
                         </div>
                     </li>
                 {% else %}
+                    <li class="nav-item">
+                        <a href="{{ path('account_register_pro') }}" class="nav-link">Vous êtes un professionnel ?</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ path('account_register') }}" class="nav-link">Inscription</a>
                     </li>

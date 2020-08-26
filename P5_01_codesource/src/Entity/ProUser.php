@@ -53,12 +53,6 @@ class ProUser implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url(message="L'URL est invalide. voici un exemple d'URL valide : https://maphoto/64x64")
-     */
-    private $profilePicture;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $hash;
@@ -120,9 +114,38 @@ class ProUser implements UserInterface
      */
     private $userRoles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $companySiret;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="proUser", orphanRemoval=true)
+     */
+    private $comment;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message="L'URL est invalide. voici un exemple d'URL valide : https://maphoto/64x64")
+     */
+    private $picture;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="proUsers")
+     */
+    private $proUserRoles;
+
     public function __construct()
     {
-        $this->userRoles = new ArrayCollection();
+        // $this->userRoles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+        $this->proUserRoles = new ArrayCollection();
     }
 
     public function getFullName()
@@ -144,6 +167,20 @@ class ProUser implements UserInterface
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->firstName .' '. $this->lastName);
         }
+    }
+
+    
+    public function getAvgRatings()
+    {
+        // On calcul la somme des notes
+        $sum = array_reduce($this->comments->toArray(), function($total, $comment) {
+            return $total + $comment->getRating();
+        }, 0);
+
+        // Division pour avoir la moyenne
+        if(count($this->comments) > 0) return $sum / count($this->comments);
+
+        return 0;
     }
 
     public function getId(): ?int
@@ -184,18 +221,6 @@ class ProUser implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getProfilePicture(): ?string
-    {
-        return $this->profilePicture;
-    }
-
-    public function setProfilePicture(?string $profilePicture): self
-    {
-        $this->profilePicture = $profilePicture;
 
         return $this;
     }
@@ -347,21 +372,92 @@ class ProUser implements UserInterface
         return $this->userRoles;
     }
 
-    public function addUserRole(Role $userRole): self
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
     {
-        if (!$this->userRoles->contains($userRole)) {
-            $this->userRoles[] = $userRole;
-            $userRole->addUser($this);
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeUserRole(Role $userRole): self
+    public function removeComment(Comment $comment): self
     {
-        if ($this->userRoles->contains($userRole)) {
-            $this->userRoles->removeElement($userRole);
-            $userRole->removeUser($this);
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCompanySiret(): ?string
+    {
+        return $this->companySiret;
+    }
+
+    public function setCompanySiret(string $companySiret): self
+    {
+        $this->companySiret = $companySiret;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getProUserRoles(): Collection
+    {
+        return $this->proUserRoles;
+    }
+
+    public function addProUserRole(Role $proUserRole): self
+    {
+        if (!$this->proUserRoles->contains($proUserRole)) {
+            $this->proUserRoles[] = $proUserRole;
+            $proUserRole->addProUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProUserRole(Role $proUserRole): self
+    {
+        if ($this->proUserRoles->contains($proUserRole)) {
+            $this->proUserRoles->removeElement($proUserRole);
+            $proUserRole->removeProUser($this);
         }
 
         return $this;

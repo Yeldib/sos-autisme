@@ -25,13 +25,19 @@ class Role
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ProUser::class, inversedBy="userRoles")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="userRoles")
      */
     private $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=ProUser::class, inversedBy="proUserRoles")
+     */
+    private $proUsers;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->proUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,14 +58,14 @@ class Role
     }
 
     /**
-     * @return Collection|ProUser[]
+     * @return Collection|User[]
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(ProUser $user): self
+    public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -68,10 +74,36 @@ class Role
         return $this;
     }
 
-    public function removeUser(ProUser $user): self
+    public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProUser[]
+     */
+    public function getProUsers(): Collection
+    {
+        return $this->proUsers;
+    }
+
+    public function addProUser(ProUser $proUser): self
+    {
+        if (!$this->proUsers->contains($proUser)) {
+            $this->proUsers[] = $proUser;
+        }
+
+        return $this;
+    }
+
+    public function removeProUser(ProUser $proUser): self
+    {
+        if ($this->proUsers->contains($proUser)) {
+            $this->proUsers->removeElement($proUser);
         }
 
         return $this;

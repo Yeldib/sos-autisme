@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ProUser;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -12,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegistrationType extends ApplicationType
+class RegistrationUserProType extends ApplicationType
 {
      public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,9 +34,9 @@ class RegistrationType extends ApplicationType
                  $this->getConfiguration("Email", "Indiquez votre adresse email")
                 )
             ->add(
-                 'profilePicture', 
+                 'picture', 
                  UrlType::class, 
-                 $this->getConfiguration("Photo de profil", "Renseignez une url pour votre photo (non obligatoire)", 
+                 $this->getConfiguration("Photo de profil", "Renseignez une url pour votre photo (facultatif)", 
                  ['required' => false])
                 )
             ->add(
@@ -55,9 +56,17 @@ class RegistrationType extends ApplicationType
                 )
             ->add(
                  'jobCategory', 
-                 TextType::class, 
-                 $this->getConfiguration("Métier", "Votre métier")
-                )
+                 ChoiceType::class,[ 
+                   'label' => "Selectionnez votre métier",
+                   'placeholder' => "-- liste --",                  
+                   'choices'   => [                       
+                       'Orthophoniste'    => 'Orthophoniste',
+                       'Pédopsychiatre'   =>   'Pédopsychiatre',
+                       'Éducateur(trice) spécialisé(e)' => 'Éducateur(trice) spécialisé(e)',
+                       'Psychomotricien(ne)' => 'Psychomotricien(ne)',
+                       'Psychologue' => 'Psychologue'
+                   ]                     
+                ])
             ->add(
                  'address', 
                  TextType::class, 
@@ -83,6 +92,11 @@ class RegistrationType extends ApplicationType
                  TextareaType::class, 
                  $this->getConfiguration("Déscription", "Vous décrire (non obligatoire)", 
                  ['required' => false])
+                )
+            ->add(
+                 'companySiret', 
+                 TextType::class, 
+                 $this->getConfiguration("SIRET", "Indiquez votre numéro SIRET")
                 );
     }
 

@@ -2,9 +2,11 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\ProUser;
-use App\Entity\Role;
 use Faker\Factory;
+use App\Entity\Role;
+use App\Entity\User;
+use App\Entity\Comment;
+use App\Entity\ProUser;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -26,25 +28,20 @@ class AppFixtures extends Fixture
         $adminRole->setTitle('ROLE_ADMIN');
         $manager->persist($adminRole);
 
-        $adminUser = new ProUser();
+        $adminUser = new User();
         $adminUser->setFirstName('Ethan')
                   ->setLastName('EL DIB')
                   ->setEmail('e.ethan@gmail.com')
                   ->setHash($this->encoder->encodePassword($adminUser, 'password'))
-                  ->setPhoneNumber('0666323275')
-                  ->setJobCategory('Developpeur Web')
-                  ->setAddress('4 rue Dantesque')
-                  ->setPostalCode('27140')
-                  ->setCity('Gisors')
-                  ->setDepartment('27')
                   ->addUserRole($adminRole);
         $manager->persist($adminUser);
 
         // Gestion des utilisateurs PRO
-        $users = [];
+        $ProUsers = [];
         $genres = ['male', 'female'];
+        $jobs = ['Orthophoniste', 'Pédopsychiatre', 'Éducateur(trice) spécialisé(e)', 'Psychomotricien(ne)', 'Psychologue'];
 
-        for ($i=1; $i <= 15; $i++) { 
+        for ($i=1; $i <= 40; $i++) { 
             $proUser = new ProUser();
 
             $genre = $faker->randomElement($genres);
@@ -59,19 +56,61 @@ class AppFixtures extends Fixture
             $proUser->setLastName($faker->lastName())
                     ->setFirstName($faker->firstName($genre))
                     ->setEmail($faker->email())
-                    ->setProfilePicture($profilePicture)
+                    ->setPicture($profilePicture)
                     ->setHash($hash)
                     ->setPhoneNumber($faker->phoneNumber())
-                    ->setJobCategory('Orthophoniste')
+                    ->setJobCategory($faker->randomElement($jobs))
                     ->setAddress($faker->streetAddress())
                     ->setPostalCode($faker->postcode())
                     ->setCity($faker->city())
                     ->setDepartment($faker->departmentNumber())
-                    ->setDescription('<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>');
+                    ->setDescription('<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>')
+                    ->setCompanySiret('123 456 789 12345');
 
             $manager->persist($proUser);
-            $users[] = $proUser;
+            $ProUsers[] = $proUser;
+            
         }
+
+        // Gestion des utilisateurs
+        $users = [];
+        $genres = ['male', 'female'];
+        $jobs = ['Orthophoniste', 'Pédopsychiatre', 'Éducateur(trice) spécialisé(e)', 'Psychomotricien(ne)', 'Psychologue'];
+
+        for ($i=1; $i <= 5; $i++) { 
+            $user = new User();
+
+            $genre = $faker->randomElement($genres);
+
+            $profilePicture = 'https://randomuser.me/api/portraits/';
+            $profilePictureId = $faker->numberBetween(1, 99) . '.jpg';
+
+            $profilePicture .= ($genre == 'male' ? 'men/' : 'women/') . $profilePictureId;
+
+            $hash = $this->encoder->encodePassword($user, 'password');
+
+            $user->setLastName($faker->lastName())
+                    ->setFirstName($faker->firstName($genre))
+                    ->setEmail($faker->email())
+                    ->setPicture($profilePicture)
+                    ->setHash($hash)
+                    ->setDescription('<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>')
+                    ;
+
+            $manager->persist($user);
+            $users[] = $user;
+            
+        }
+
+        // Gestion des commentaires
+        // if (mt_rand(0, 1)) {
+        //     $comment = new Comment();
+        //     $comment->setContent($faker->paragraph())
+        //             ->setRating(mt_rand(1, 5))
+        //             ->setAuthor($proUser);
+
+        //     $manager->persist($comment);
+        // }
     
         $manager->flush();
     }

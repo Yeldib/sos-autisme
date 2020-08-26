@@ -1,48 +1,119 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page du profil de {{ proUser.fullName }}{% endblock %}
+{% block title %}Page du profil de
+	{{ proUser.fullName }}
+{% endblock %}
 
 {% block body %}
 
-    <div class="container mt-5">
-    {% set u = proUser %}
-        <div class="row align-items-center">
+	<div class="container mt-5">
+		{% set u = proUser %}
+		<div class="row align-items-center">
 
-            <div class="col-3 text-center mb-3">
-                {% if u.profilePicture %}
-                    <img src="{{ u.profilePicture }}" class="avatar mb-3" alt="Photo de {{ u.fullName }}">
-                {% else %}
-                    <img src="http://placehold.it/128x128" class="avatar mb-3" alt="Photo de {{ u.fullName }}">
-                {% endif %}
-                <br>
-                <span class="badge badge-primary">{{ u.jobCategory }}</span>
-            </div>
+			<div class="col-3 text-center mb-3">
+				{% if u.Picture %}
+					<img src="{{ u.Picture }}" class="avatar mb-3" alt="Photo de {{ u.fullName }}">
+				{% else %}
+					<img src="http://placehold.it/128x128" class="avatar mb-3" alt="Photo de {{ u.fullName }}">
+				{% endif %}
+				<br>
+				<span id="badgeJob" class="badge badge-primary">{{ u.jobCategory }}</span>
+			</div>
 
-            <div class="col-9">
-                <h1>{{ u.fullName }}</h1>
-                {% if proUser is same as(app.user) %}
-                    <div class="mt-3">
-                        <a href="{{ path('account_profile') }}" class="btn btn-info btn-sm mr-2 mb-2">Modifier mes informations</a>
-                        <a href="{{ path('account_password') }}" class="btn btn-primary btn-sm mb-2">Modifier mon mot de passe</a>
-                    </div>
-                {% endif %}
-            </div>
+			<div class="col-9">
+				<h1>{{ u.fullName }}</h1>
+				{% if proUser is same as(app.user) %}
+					<div class="mt-3">
+						<a href="{{ path('account_profile') }}" class="btn btn-info btn-sm mr-2 mb-2">Modifier mes informations</a>
+						<a href="{{ path('account_password') }}" class="btn btn-primary btn-sm mb-2">Modifier mon mot de passe</a>
+					</div>
+				{% endif %}
+			</div>
 
-        </div>
-                {% if u.description %}
-                    {{ u.description | raw }}
-                {% else %}
-                    <div class="alert alert-warning">
-                        <p><strong>{{ u.fullName }}</strong> n'a pas encore de déscription sur le site.</p>
-                    </div>   
-                {% endif %}
-                <hr>
-                <h2>Coordonnées du professionnel</h2>
-                {{ u.address }}
-                {{ u.postalCode }}
-                {{ u.city }} <br>
-                {{ u.email }} <br>
-                {{ u.phoneNumber }}
-    </div>
+		</div>
+        <h5 class="mt-5 mb-3">Description</h5>
+		{% if u.description %}
+			{{ u.description | raw }}
+		{% else %}
+			<div class="alert alert-warning">
+				<p>
+					<strong>{{ u.fullName }}</strong>
+					n'a pas encore de déscription sur le site.
+                </p>
+			</div>
+		{% endif %}
+		<hr>
+
+		<div class="modal-dialog bg-dark mt-5" role="document">
+			<div class="modal-content ">
+				<div class="modal-header bg-dark">
+					<h5 class="modal-title text-light">Coordonnées du professionnel</h5>
+				</div>
+				<div class="modal-body d-lg-flex d-md-flex justify-content-around">
+					<p><i class="fas fa-map-marked-alt"></i>
+						<br>
+						{{ u.address }}
+						<br>
+						{{ u.postalCode }}
+						<br>
+						{{ u.city }}
+                    </p>
+					<p><i class="fas fa-phone-square"></i>
+                        <br>
+						{{ u.phoneNumber }}
+                    </p>
+					<p><i class="fas fa-at"></i>
+                        <br>
+						{{ u.email }}
+					</p>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+		<hr>
+
+		<div class="alert alert-light">
+			<h2 class="alert alert-heading">Laissez un commentaire</h2>
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+				<button type="submit" class="btn btn-success btn-md">Confirmer</button>
+			{{ form_end(form) }}
+		</div>
+
+		<hr>
+
+		{% if proUser.comments | length > 0 %}
+			<h2 class="mb-3">Commentaires sur ce praticien :</h2>
+
+			<div class="alert alert-info">
+				<h4 class="alert-heading text-center">
+					<div class="row align-items-center">
+						<div class="col">
+							Note globale du praticien 	
+						</div>
+						<div class="col">
+							{% include "partials/rating.html.twig" with {'rating' : proUser.avgRatings} %}
+							<br>
+							<small>(Moyenne sur {{ proUser.comments | length }} avis) </small>
+						</div>
+					</div>
+				</h4>
+			</div>
+
+			{% for comment in proUser.comments %}
+				<div class="bg-light rounded mb-3 py-3 px-3">
+					<strong class="text-primary"> {{ comment.author.fullName }} </strong> a dit :
+					<blockquote class="blockquote">
+						{{ comment.content }}
+					</blockquote>
+					<strong class="text-primary">Note donnée par {{ comment.author.fullName }} :</strong>
+
+					{% include "partials/rating.html.twig" with {'rating' : comment.rating} %}
+				</div>		
+			{% endfor %}
+		{% else %}
+			<h2>Ce praticien n'a pas encore reçu de commentaires.</h2>
+		{% endif %}
+	</div>
 
 {% endblock %}
