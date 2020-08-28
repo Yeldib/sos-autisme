@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page du profil de
-	{{ proUser.fullName }}
-{% endblock %}
+{% block title %}Page du profil de{{ proUser.fullName }}{% endblock %}
 
 {% block body %}
 
@@ -102,11 +100,11 @@
 
 			{% for comment in proUser.comments %}
 				<div class="bg-light rounded mb-3 py-3 px-3">
-					<strong class="text-primary"> {{ comment.author.fullName }} </strong> a dit :
+					<strong class="text-primary"> {{ comment.author.firstName }} </strong> a dit :
 					<blockquote class="blockquote">
 						{{ comment.content }}
 					</blockquote>
-					<strong class="text-primary">Note donnée par {{ comment.author.fullName }} :</strong>
+					<strong class="text-primary">Note donnée :</strong>
 
 					{% include "partials/rating.html.twig" with {'rating' : comment.rating} %}
 				</div>		

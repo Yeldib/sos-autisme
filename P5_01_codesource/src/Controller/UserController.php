@@ -30,7 +30,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setAuthor($this->getUser());
+            $comment->setAuthor($this->getUser())
+                    ->setProUser($proUser);
 
             $manager->persist($comment);
             $manager->flush();

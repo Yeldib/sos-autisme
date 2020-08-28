@@ -96,7 +96,7 @@ class RegistrationUserProType extends ApplicationType
             ->add(
                  'companySiret', 
                  TextType::class, 
-                 $this->getConfiguration("SIRET", "Indiquez votre numéro SIRET")
+                 $this->getConfiguration("SIRET", "Numéro SIRET")
                 );
     }
 

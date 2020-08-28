@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\ProUser;
-use App\Form\AccountType;
+use App\Form\AccountUserType;
+use App\Form\AccountProUserType;
 use App\Entity\PasswordUpdate;
 use App\Form\PasswordUpdateType;
 use App\Form\RegistrationUserType;
@@ -122,18 +123,18 @@ class AccountController extends AbstractController
     }
 
     /**
-     * Permet d'afficher et de traiter le formulaire de modification du profil
+     * Permet d'afficher et de traiter le formulaire de modification du profil d'un professionnel
      * 
-     * @Route("/account/profile", name="account_profile")
-     * @Security("is_granted('ROLE_USER') or is_granted('ROLE_PRO_USER')")
+     * @Route("/account-pro/profile", name="account_profile_pro")
+     * @Security("is_granted('ROLE_PRO_USER')")
      *
      * @return Response
      */
-    public function profile(Request $request, EntityManagerInterface $manager)
+    public function profileProUser(Request $request, EntityManagerInterface $manager)
     {
         $proUser = $this->getUser(); //  On vérifie si l'utilisateur est connecté
 
-        $form = $this->createForm(AccountType::class, $proUser);
+        $form = $this->createForm(AccountProUserType::class, $proUser);
 
         $form->handleRequest($request);
 
@@ -147,7 +148,38 @@ class AccountController extends AbstractController
             );
         }
 
-        return $this->render('account/profile.html.twig', [
+        return $this->render('account/profileProUser.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Permet d'afficher et de traiter le formulaire de modification du profil d'un utilisateur
+     * 
+     * @Route("/account/profile", name="account_profile")
+     * @Security("is_granted('ROLE_USER')")
+     *
+     * @return Response
+     */
+    public function profileUser(Request $request, EntityManagerInterface $manager)
+    {
+        $user = $this->getUser(); //  On vérifie si l'utilisateur est connecté
+     
+        $form = $this->createForm(AccountUserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Vos modifications on bien été enregistrée."
+            );
+        }
+
+        return $this->render('account/profileUser.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -201,14 +233,16 @@ class AccountController extends AbstractController
      * Permet d'afficher le profil de l'utilisateur connecté
      * 
      * @Route("/account", name="account_index")
-     * Security("is_granted('ROLE_USER') or is_granted('ROLE_PRO_USER')")
+     * @Security("is_granted('ROLE_USER') or is_granted('ROLE_PRO_USER')")
      *
      * @return Response
      */
     public function myAccount()
     {
         return $this->render('user/indexAccount.html.twig', [
-            'proUser' => $this->getUser(),
+            'user' => $this->getUser(),
         ]);
     }
+
+
 }

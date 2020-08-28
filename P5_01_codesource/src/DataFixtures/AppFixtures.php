@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
 
         for ($i=1; $i <= 40; $i++) { 
             $proUser = new ProUser();
+            $user = new User();
 
             $genre = $faker->randomElement($genres);
 
@@ -68,8 +69,7 @@ class AppFixtures extends Fixture
                     ->setCompanySiret('123 456 789 12345');
 
             $manager->persist($proUser);
-            $ProUsers[] = $proUser;
-            
+            $ProUsers[] = $proUser;           
         }
 
         // Gestion des utilisateurs
@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
         $genres = ['male', 'female'];
         $jobs = ['Orthophoniste', 'Pédopsychiatre', 'Éducateur(trice) spécialisé(e)', 'Psychomotricien(ne)', 'Psychologue'];
 
-        for ($i=1; $i <= 5; $i++) { 
+        for ($i=1; $i <= 25; $i++) { 
             $user = new User();
 
             $genre = $faker->randomElement($genres);
@@ -100,17 +100,18 @@ class AppFixtures extends Fixture
             $manager->persist($user);
             $users[] = $user;
             
+            // Gestion des commentaires
+            if (mt_rand(0, 1)) {
+                $comment = new Comment();
+                $comment->setContent($faker->paragraph())
+                        ->setRating(mt_rand(1, 5))
+                        ->setAuthor($user)
+                        ->setProUser($proUser);
+    
+                $manager->persist($comment);
+            }
+            
         }
-
-        // Gestion des commentaires
-        // if (mt_rand(0, 1)) {
-        //     $comment = new Comment();
-        //     $comment->setContent($faker->paragraph())
-        //             ->setRating(mt_rand(1, 5))
-        //             ->setAuthor($proUser);
-
-        //     $manager->persist($comment);
-        // }
     
         $manager->flush();
     }

@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5">Gestions des utilisateurs</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Utilisateurs</th>
+                    <th>Email</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>
+                        {% if user.picture %}
+                        <img src="{{ user.picture }}" alt="photo de {{ user.fullName }}" class="avatar avatar-micro mr-2"> 
+                        {{ user.fullName }}
+                        {% else %}
+                        <img src="http://placehold.it/20x20" alt="photo de {{ user.fullName }}" class="avatar avatar-micro mr-2"> 
+                        {{ user.fullName }}   
+                        {% endif %}
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.description|raw }}</td>
+                    <td>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </t>         
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

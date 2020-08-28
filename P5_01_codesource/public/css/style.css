@@ -21,11 +21,16 @@
     max-height: 24px;
 }
 
-#randomAvatar{
+.avatar-micro {
+    min-width: 20px;
+    max-height: 20px;
+}
+
+#randomAvatar {
     font-size: 128px;
 }
 
-#randomAvatarMini{
+#randomAvatarMini {
     font-size: 24px;
 }
 
@@ -34,7 +39,8 @@
     margin-bottom: 10px;
 }
 
-.modal-body p:nth-child(1) ,p:nth-child(2) {
+.modal-body p:nth-child(1),
+p:nth-child(2) {
     border-right: 1px solid grey;
     padding-right: 12px;
     padding-left: 12px;
@@ -49,10 +55,70 @@
     font-size: 13px;
 }
 
-.modal-dialog{
+.modal-dialog {
     max-width: 615px;
 }
 
 span.rating i {
-    color:goldenrod ;
+    color: goldenrod;
+}
+
+
+.data-search {
+    width: 80%;
+    margin: 0 auto;
+    height: 40vh;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('http://lorempixel.com/400/200/people/1');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "roboto", cursive;
+}
+
+.data-search .input-group {
+    display: flex;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.data-search .form-control {
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 500;
+    background: #fdfdfd;
+    transition: .3s ease;
+    color: black;
+}
+
+.data-search input.form-control {
+    width: 350px;
+}
+
+.data-search .btn {
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 500;
+    padding: 0 7px;
+    background: white;
+    transition: .3s ease;
+    color: black;
+}
+
+.data-search select:hover {
+    box-shadow: inset 0 0 100px rgba(221, 219, 219, 0.829);
+}
+
+.data-search .btn:hover {
+    box-shadow: inset 0 0 100px rgba(221, 219, 219, 0.829);
+}
+
+.data-search .form-control:focus {
+    box-shadow: inset 0 0 100px rgba(221, 219, 219, 0.829);
 }

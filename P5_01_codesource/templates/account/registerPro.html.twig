@@ -5,14 +5,55 @@
 {% block body %}
 
     <div class="container">
-        <h1>Inscription</h1>
+        <h1 class="my-5 text-center">Inscription</h1>
 
         {{form_start(form)}}
 
-        {{form_widget(form)}} 
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Informations générales</h2>
+                    <hr>
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.jobCategory) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.picture) }}
+                </div>
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Votre déscription</h2>
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Authentification</h2>
+                    {{ form_row(form.hash) }}
+                    {{ form_row(form.passwordConfirm) }}
+                </div>
+            </div>
 
-        <button type="submit" class="btn btn-primary btn-md">Vous inscrire</button>
-        {{form_end(form)}} 
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Coordonnées professionnelles</h2>
+                    <hr>
+                    {{ form_row(form.address) }}
+                    {{ form_row(form.city) }}
+                    {{ form_row(form.postalCode) }}
+                    {{ form_row(form.department) }}
+                    {{ form_row(form.phoneNumber) }}
+                    {{ form_row(form.companySiret) }}
+                </div>
+                 
+            </div>
+        </div>
+        <div class="alert alert-success clearfix ">
+            <h2 class="alert alert-heading h5">Enregistrer votre profil</h2>
+            <p>Vous êtes sur le point de finaliser votre inscription sur notre site.</p>
+            <button type="submit" class="btn btn-secondary btn-md float-right ">
+                <i class="fas fa-check"></i>
+                 Vous inscrire
+            </button>
+            {{form_end(form)}} 
+        </div>
     </div>
 
 {% endblock %}

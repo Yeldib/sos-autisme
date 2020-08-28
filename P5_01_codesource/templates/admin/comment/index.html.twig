@@ -1,0 +1,58 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des commentaires
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<h1 class="my-5">Administration des commentaires</h1>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Date</th>
+					<th>Auteur</th>
+					<th>Commentaire</th>
+					<th>Note</th>
+					<th>Professionnel concerné</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for comment in comments %}
+                <tr>
+                    <td>{{ comment.id }}</td>
+                    <td>{{ comment.createdAt | date("m/d/Y H:i") }}</td>
+                    <td>
+                        {% if comment.author.picture %}
+                            <img src="{{ comment.author.picture }}" alt="photo de {{ comment.author.fullName }}" class="avatar avatar-micro mr-2">
+                            {{ comment.author.fullName }}
+                        {% else %}
+                            <img src="http://placehold.it/20x20" alt="photo de {{ comment.author.fullName }}" class="avatar avatar-micro mr-2">
+                            {{ comment.author.fullName }}
+                        {% endif %}
+                    </td>
+                    <td>{{ comment.content }}</td>
+                    <td>
+                        <span class="badge badge-dark">{{ comment.rating }}</span> 
+                    </td>
+                    <td>
+                        {{ comment.prouser.fullname }} <br> 
+                        ({{ comment.prouser.jobcategory }})
+                    </td>      
+                    <td>
+                        <a href="{{ path('admin_comment_edit', {'id' : comment.id }) }}" class="btn btn-primary">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                        <a href="{{ path('admin_comment_delete', {'id' : comment.id }) }}" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

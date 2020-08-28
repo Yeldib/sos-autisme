@@ -38,18 +38,24 @@ class Comment
      * @ORM\ManyToOne(targetEntity=ProUser::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
+    private $proUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $author;
 
     /**
-     * Permet de mettre en place la date de creation
+     * Permet de mettre en place la date de création
      * 
-     * @ORM\PrePersist()
+     * @ORM\PrePersist
      *
      * @return void
      */
     public function prePersist()
     {
-        if(empty($this->createdAt)){
+        if(empty($this->createdAt)) {
             $this->createdAt = new \DateTime();
         }
     }
@@ -95,16 +101,27 @@ class Comment
         return $this;
     }
 
-    public function getAuthor(): ?ProUser
+    public function getProUser(): ?ProUser
+    {
+        return $this->proUser;
+    }
+
+    public function setProUser(?ProUser $proUser): self
+    {
+        $this->proUser = $proUser;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?ProUser $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
         return $this;
     }
-
 }

@@ -1,78 +1,80 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Bienvenue sur notre site.{% endblock %}
+{% block title %}Bienvenue sur notre site.
+{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="jumbotron">
-            <h1 class="display-3 text-center">Bienvenue sur sos-autisme</h1>
-            <p class="lead">Principe du site</p>
-            <hr class="my-4">
-            <p>Vous êtes parents d'un enfant autiste ? Ce site vous guidera aux mieux pour vous aider à trouver les bonnes informations</p>
-            <p class="lead"><a class="btn btn-primary btn-sm" href="#" role="button">Liens utiles</a></p>
-        </div>
-    </div>
-    
-    {# Barre de recherche #} 
-    {{ form_start(form) }}
-        <div class="container">
-            <div class="form-group">
-                <div class="form-inline my-2 my-lg-0">
-                    {{ form_widget(form.jobCategory) }}
-                    {{ form_widget(form.department) }}        
-                    <button class="btn btn-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<h1 class="display-4 text-center">Bienvenue sur sos-autisme</h1>
+			<p class="lead">Principe du site</p>
+			<hr class="my-4">
+			<p>Vous êtes parents d'un enfant autiste ? Ce site vous guidera aux mieux pour vous aider à trouver les bonnes informations</p>
+			<p class="lead">
+				<a class="btn btn-primary btn-sm" href="#" role="button">Liens utiles</a>
+			</p>
+		</div>
+	</div>
+
+	{# Barre de recherche #}
+	<section class="data-search">
+	{{ form_start(form) }}	
+			<div class="form-group">
+				<div class="input-group">
+					{{ form_widget(form.jobCategory) }}
+				    {{ form_widget(form.department) }}	
+					<button type="submit" class="btn"><i class="fas fa-search"></i></button>
                 </div>
-            </div>
-        </div>
-    {{ form_end(form) }}
-
-    {# Prévisualisation de la fiche du professionnel #}
-    <section class="container" >
-
-        <div class="row mt-5">
-        {% if users %}
-            {% for proUser in users %}
-                <div class="card text-white bg-dark mb-3 mt-5 ml-3 col-md-3">
-                    <div>
-
-                        <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
-                            <p class="text-white">{{ proUser.fullName }}</p>
-                        </a>
-                        {% if proUser.comments | length > 0 %}
-                            {% include "partials/rating.html.twig" with {'rating' : proUser.avgRatings} %}
-                        {% else %}
-                            <small>Pas encore noté</small>
-                        {% endif %}   
-                    </div>
-                    
-                    {% if proUser.Picture %}
-                        <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
-                            <img src="{{ proUser.Picture }}" class="avatar mb-3" alt="Photo de {{ proUser.fullName }}">
-                        </a>
-                    {% else %}
-                        <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
-                            <i class="fas fa-user-circle" id="randomAvatar"></i>
-                        </a>
-                    {% endif %}
-                    
-                    <div class="card-body">
-                        <h6 class="card-title">{{ proUser.jobCategory }}</h6>
-                        <hr>
-                        <p class="card-text">
-                            {{ proUser.address }}
-                        </p>
-                        <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}" class="btn btn-primary">Plus d'informations</a>
-                    </div>
-                </div>            
-            {% endfor %}
-            {% else %}
-                <div class="container">
-                    <div class="alert alert-info text-center">
-                        <p>Aucun réslultat</p>
-                    </div>
-                </div>
-        {% endif %}            
-        </div>
+            </div> 
+	{{ form_end(form) }}
     </section>
-    
-{% endblock %}
+
+		{# Prévisualisation de la fiche du professionnel #}
+		<section class="container">
+			<div class="row mt-5">
+				{% if users %}
+					{% for proUser in users %}
+						<div class="card text-white bg-dark mb-3 mt-5 ml-3 col-md-3">
+							<div>
+
+								<a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
+									<p class="text-white">{{ proUser.fullName }}</p>
+								</a>
+								{% if proUser.comments | length > 0 %}
+									{% include "partials/rating.html.twig" with {'rating' : proUser.avgRatings} %}
+								{% else %}
+									<small>Pas encore noté</small>
+								{% endif %}
+							</div>
+
+							{% if proUser.Picture %}
+								<a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
+									<img src="{{ proUser.Picture }}" class="avatar mb-3" alt="Photo de {{ proUser.fullName }}">
+								</a>
+							{% else %}
+								<a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
+									<i class="fas fa-user-circle" id="randomAvatar"></i>
+								</a>
+							{% endif %}
+
+							<div class="card-body">
+								<h6 class="card-title">{{ proUser.jobCategory }}</h6>
+								<hr>
+								<p class="card-text">
+									{{ proUser.address }}
+								</p>
+								<a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}" class="btn btn-primary">Plus d'informations</a>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="container">
+						<div class="alert alert-info text-center">
+							<p>Aucun réslultat</p>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</section>
+
+	{% endblock %}

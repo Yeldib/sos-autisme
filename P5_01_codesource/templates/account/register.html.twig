@@ -4,15 +4,44 @@
 
 {% block body %}
 
-    <div class="container">
-        <h1>Inscription</h1>
+	<div class="container">
+		<h1 class="my-5 text-center">Inscription</h1>
 
-        {{form_start(form)}}
+		{{form_start(form)}}
+		<div class="row">
+			<div class="col">
+				<div class="alert alert-light">
+					<h2 class="alert-heading h4">Informations générales</h2>
+					<hr>
+					{{ form_row(form.lastName) }}
+					{{ form_row(form.firstName) }}
+					{{ form_row(form.email) }}
+					{{ form_row(form.picture) }}
+				</div>
+			</div>
+			<div class="col">
+				<div class="alert alert-light">
+					<h2 class="alert-heading h4">Authentification</h2>
+					<hr>
+					{{ form_row(form.hash) }}
+					{{ form_row(form.passwordConfirm) }}
+				</div>
+				<div class="alert alert-light">
+					<h2 class="alert-heading h4">Détails sur vous</h2>
+					<hr>
+					{{ form_row(form.description) }}
 
-        {{form_widget(form)}} 
+					<hr>
+					<p>Vous êtes sur le point de vous inscrire sur notre site.</p>
+					<button type="submit" class="btn btn-success btn-md rounded">
+						<i class="fa fa-check"></i>
+						Vous inscrire
+					</button>
+				</div>
+			</div>
+		</div>
 
-        <button type="submit" class="btn btn-primary btn-md">Vous inscrire</button>
-        {{form_end(form)}} 
-    </div>
+		{{form_end(form)}}
+	</div>
 
 {% endblock %}
