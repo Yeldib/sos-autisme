@@ -1,3 +1,5 @@
+@import url('./bootstrap.min.css');
+
 .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -9,21 +11,21 @@
     max-width: 128px;
     max-height: 128px;
     border-radius: 50%;
-}
 
-.avatar-medium {
-    max-width: 128px;
-    max-height: 128px;
-}
+    &.avatar-medium {
+        max-width: 128px;
+        max-height: 128px;
+    }
 
-.avatar-mini {
-    min-width: 24px;
-    max-height: 24px;
-}
+    &.avatar-mini {
+        min-width: 24px;
+        max-height: 24px;
+    }
 
-.avatar-micro {
-    min-width: 20px;
-    max-height: 20px;
+    &.avatar-micro {
+        min-width: 20px;
+        max-height: 20px;
+    }
 }
 
 #randomAvatar {
@@ -121,4 +123,10 @@ span.rating i {
 
 .data-search .form-control:focus {
     box-shadow: inset 0 0 100px rgba(221, 219, 219, 0.829);
+}
+
+img.logo {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
 }
