@@ -18,8 +18,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
- *  fields={"email"},
- *  message="Cette adresse email est déjà utilisée"
+ *  fields={"pseudo"},
+ *  message="Ce pseudonyme est déjà utilisé"
  * )
  * 
  */
@@ -89,6 +89,12 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * Assert\NotBlank(message="Merci d'indiquer un pseudonyme.")
+     */
+    private $pseudo;
 
     public function __construct()
     {
@@ -292,6 +298,18 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }

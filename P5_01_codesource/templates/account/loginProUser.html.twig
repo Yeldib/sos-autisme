@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion au site{% endblock %}
+{% block title %}Connexion au site pour un professionnel{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -8,16 +8,16 @@
             <div class="col-md-3">&nbsp;</div>
             <div class="col-md-6">
                 <div class="bg-light py-3 px-3 mt-5">
-                <h1>Connexion</h1>
+                <h4>Connexion compte professionnel</h4>
 
                     {% if hasError %}
-                        <div class="alert alert-danger">Pseudo ou mot de passe invalide</div>               
+                        <div class="alert alert-danger">Email ou mot de passe invalide</div>               
                     {% endif %}
 
-                    <form action="{{ path('account_login') }}" method="post">
+                    <form action="{{ path('account_login_pro') }}" method="post">
                         <div class="form-group">
-                            <label for="pseudo">Pseudo</label>
-                            <input type="text" name="_username" id="pseudo" class="form-control" placeholder="Votre pseudonyme" required value="{{ username }}">    
+                            <label for="email">Email</label>
+                            <input type="email" name="_username" id="email" class="form-control" placeholder="Votre adresse email" required value="{{ username }}">    
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe</label>

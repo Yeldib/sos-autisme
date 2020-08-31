@@ -41,6 +41,24 @@ class AccountController extends AbstractController
     }
 
     /**
+     * Permet d'afficher et de gérer le formulaire de connexion d'un professionnel
+     * 
+     * @Route("/login/pro-user", name="account_login_pro")
+     * 
+     * @return Response
+     */
+    public function loginProUser(AuthenticationUtils $utils)
+    {
+        $error = $utils->getLastAuthenticationError();
+        $username = $utils->getLastUsername();
+
+        return $this->render('account/loginProUser.html.twig', [
+            'hasError' => $error !== null,
+            'username' => $username
+        ]);
+    }
+
+    /**
      * Permet de se déconnecter
      * 
      * @Route("/logout", name="account_logout")
@@ -79,7 +97,7 @@ class AccountController extends AbstractController
                 "Merci pour votre inscription."
             );
 
-            return $this->redirectToRoute('account_login');
+            return $this->redirectToRoute('account_login_pro');
         }
 
         return $this->render('account/registerPro.html.twig', [

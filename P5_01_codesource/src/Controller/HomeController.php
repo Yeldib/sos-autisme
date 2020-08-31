@@ -35,6 +35,10 @@ class HomeController extends AbstractController  {
              if ($jobCategory!="" && $department!="") 
                $users= $this->getDoctrine()->getRepository(ProUser::class)->findBy(['jobCategory' => $jobCategory , 'department' => $department] );
             }
-             return  $this->render('home.html.twig',[ 'form' =>$form->createView(), 'users' => $users]); 
+             return  $this->render('home.html.twig',[
+                'form' =>$form->createView(),
+                'users' => $users
+                ]
+            ); 
     }
 }

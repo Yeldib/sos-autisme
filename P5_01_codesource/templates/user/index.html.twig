@@ -43,9 +43,9 @@
 		<hr>
 
 		<div class="modal-dialog bg-dark mt-5" role="document">
-			<div class="modal-content ">
-				<div class="modal-header bg-dark">
-					<h5 class="modal-title text-light">Coordonnées du professionnel</h5>
+			<div class="modal-content text-center ">
+				<div class="modal-header bg-dark ">
+					<h5 class="text-light ">Coordonnées du professionnel</h5>
 				</div>
 				<div class="modal-body d-lg-flex d-md-flex justify-content-around">
 					<p><i class="fas fa-map-marked-alt"></i>
@@ -70,13 +70,19 @@
 		</div>
 		<hr>
 
-		<div class="alert alert-light">
-			<h2 class="alert alert-heading">Laissez un commentaire</h2>
-			{{ form_start(form) }}
-			{{ form_widget(form) }}
-				<button type="submit" class="btn btn-success btn-md">Confirmer</button>
-			{{ form_end(form) }}
-		</div>
+		{% if app.user %}
+			<div class="alert alert-light">
+				<h2 class="alert alert-heading">Laissez un commentaire</h2>
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+					<button type="submit" class="btn btn-success btn-md">Confirmer</button>
+				{{ form_end(form) }}
+			</div>
+		{% else %}
+			<div class="alert alert-warning">
+				<h4 class="alert alert-heading">Il faut être connecté pour donner votre avis</h4>
+			</div>
+		{% endif %}
 
 		<hr>
 

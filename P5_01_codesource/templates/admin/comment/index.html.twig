@@ -43,10 +43,10 @@
                         ({{ comment.prouser.jobcategory }})
                     </td>      
                     <td>
-                        <a href="{{ path('admin_comment_edit', {'id' : comment.id }) }}" class="btn btn-primary">
+                        <a href="{{ path('admin_comment_edit', {'id' : comment.id }) }}" class="btn btn-info rounded">
                             <i class="fas fa-pen"></i>
                         </a>
-                        <a href="{{ path('admin_comment_delete', {'id' : comment.id }) }}" class="btn btn-danger">
+                        <a href="{{ path('admin_comment_delete', {'id' : comment.id }) }}" class="btn btn-danger rounded mt-2" onclick="return confirm('Confirmer la suppression ?');">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>

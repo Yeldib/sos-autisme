@@ -17,6 +17,11 @@ class RegistrationUserType extends ApplicationType
     {
         $builder
             ->add(
+                'pseudo',
+                TextType::class, 
+                $this->getConfiguration("Pseudonyme", "Indiquez un pseudonyme")
+                )
+            ->add(
                 'lastName',
                 TextType::class, 
                 $this->getConfiguration("Nom", "Indiquez votre nom")

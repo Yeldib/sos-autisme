@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\ProUser;
+use App\Entity\User;
+use App\Form\AdminUserType;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,5 +48,36 @@ class UserController extends AbstractController
             'proUser' => $proUser,
             'form'    => $form->createView()
         ]);
+    }
+
+    /**
+     * Permet d'afficher le formulaire d'édition des utilisateurs
+     *
+     * @Route("/admin/users/{id}/edit", name="admin_user_edit")
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function edit(Request $request, EntityManagerInterface $manager, User $user)
+    {
+        $form = $this->createForm(AdminUserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "La modification du commentaire n° {$user->getId()} a bien été enregistrée."
+            );
+        }
+
+        return $this->render('admin/user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+            ]);
     }
 }

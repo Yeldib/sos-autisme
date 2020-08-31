@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
         $genres = ['male', 'female'];
         $jobs = ['Orthophoniste', 'Pédopsychiatre', 'Éducateur(trice) spécialisé(e)', 'Psychomotricien(ne)', 'Psychologue'];
 
-        for ($i=1; $i <= 40; $i++) { 
+        for ($i=1; $i <= 525; $i++) { 
             $proUser = new ProUser();
             $user = new User();
 
@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
         $genres = ['male', 'female'];
         $jobs = ['Orthophoniste', 'Pédopsychiatre', 'Éducateur(trice) spécialisé(e)', 'Psychomotricien(ne)', 'Psychologue'];
 
-        for ($i=1; $i <= 25; $i++) { 
+        for ($i=1; $i <= 55; $i++) { 
             $user = new User();
 
             $genre = $faker->randomElement($genres);
@@ -89,13 +89,14 @@ class AppFixtures extends Fixture
 
             $hash = $this->encoder->encodePassword($user, 'password');
 
-            $user->setLastName($faker->lastName())
-                    ->setFirstName($faker->firstName($genre))
-                    ->setEmail($faker->email())
-                    ->setPicture($profilePicture)
-                    ->setHash($hash)
-                    ->setDescription('<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>')
-                    ;
+            $user->setPseudo($faker->userName())
+                 ->setLastName($faker->lastName())
+                 ->setFirstName($faker->firstName($genre))
+                 ->setEmail($faker->email())
+                 ->setPicture($profilePicture)
+                 ->setHash($hash)
+                 ->setDescription('<p>' . join('</p><p>', $faker->paragraphs(5)) . '</p>')
+                ;   
 
             $manager->persist($user);
             $users[] = $user;

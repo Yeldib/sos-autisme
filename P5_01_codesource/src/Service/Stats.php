@@ -53,7 +53,7 @@ class Stats {
                     GROUP BY p
                     ORDER BY note ' . $direction
                     )
-                    ->setMaxResults(3)
+                    ->setMaxResults(4)
                     ->getResult();
    }
 
