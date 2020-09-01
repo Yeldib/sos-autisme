@@ -100,15 +100,17 @@ class Diaporama {
 
 const slide = new Diaporama(
   "diaporama",
-  ["public/img/Diaporama/diapo1.png",
-    "public/img/Diaporama/diapo2.png",
-    "public/img/Diaporama/diapo3.png"
+  [
+    "/images/intelligence.jpg",
+    "/images/mental-health.png",
+    "/images/girlBulle.jpg"
   ],
 
-  ["1 - Cliquez sur la station de votre choix ",
-    "2 - Cliquez sur le bonton réservez",
-    "3 - Indiquez votre nom et prénom puis signé et cliqué sur reservez"
+  [
+    "QUI SOMMES-NOUS ET QUEL EST LE BUT DE CE SITE ? Nous sommes parents de deux enfants diagnostiqués autistes et le but de ce site est qu'en quelques clics les parents puissent trouver tous les professionnels de l'autisme dont ils ont besoin",
+    "CONTENU 2",
+    "COMMENT NOUS AIDER ? Diffuser au maximum autour de vous l’adresse de ce site. Vous connaissez des professionnels de l’autisme ? N’hésitez pas à nous contacter."
   ],
 
-  5000
+  10000
 );

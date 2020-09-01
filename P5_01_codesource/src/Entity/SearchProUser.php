@@ -5,6 +5,7 @@ namespace App\Entity;
 class SearchProUser
 {
 
+
    private $jobCategory;
 
    private $department;

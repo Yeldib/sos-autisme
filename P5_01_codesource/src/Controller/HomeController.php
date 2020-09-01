@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController  {
 
@@ -27,18 +28,29 @@ class HomeController extends AbstractController  {
         $form = $this->createForm(SearchProUserType::class, $search);
         $form->handleRequest($request);
 
-        $users= [];
+        $users = [];
         if($form->isSubmitted() && $form->isValid()) {
             //on récupère le métier et le departement selectionné dans le formulaire
             $jobCategory = $search->getJobCategory();   
             $department = $search->getDepartment();   
-             if ($jobCategory!="" && $department!="") 
-               $users= $this->getDoctrine()->getRepository(ProUser::class)->findBy(['jobCategory' => $jobCategory , 'department' => $department] );
+            if ($jobCategory!="" && $department!="") {
+                $users= $this->getDoctrine()
+                             ->getRepository(ProUser::class)
+                             ->findBy(['jobCategory' => $jobCategory , 'department' => $department] );
             }
+            if(!$users) {
+                 $this->addFlash(
+                    'danger',
+                    "Aucun résultat pour cette recherche"
+                );
+            }  
+            }
+
              return  $this->render('home.html.twig',[
                 'form' =>$form->createView(),
                 'users' => $users
                 ]
             ); 
     }
+
 }

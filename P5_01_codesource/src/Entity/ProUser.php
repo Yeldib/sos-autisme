@@ -452,5 +452,4 @@ class ProUser implements UserInterface
 
         return $this;
     }
-
 }

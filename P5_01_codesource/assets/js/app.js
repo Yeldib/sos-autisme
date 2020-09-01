@@ -17,3 +17,4 @@ console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
 // inmportation des fichier js nécessaire
 require('bootstrap');
+require('./diaporama.js');

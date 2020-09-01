@@ -1,0 +1,32 @@
+<div class="row mt-5">
+        <div class="card text-white bg-dark mb-3 mt-5 ml-3 col-md-3 rounded">
+            <div>
+                <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
+                    <p class="text-white">{{ proUser.fullName }}</p>
+                </a>
+                {% if proUser.comments | length > 0 %}
+                    {% include "partials/rating.html.twig" with {'rating' : proUser.avgRatings} %}
+                {% else %}
+                    <small>Pas encore noté</small>
+                {% endif %}
+        </div>
+
+                {% if proUser.Picture %}
+                    <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
+                        <img src="{{ proUser.Picture }}" class="avatar mb-3" alt="Photo de {{ proUser.fullName }}">
+                    </a>
+                {% else %}
+                    <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}">
+                        <i class="fas fa-user-circle" id="randomAvatar"></i>
+                    </a>
+                {% endif %}
+                <div class="card-body">
+                    <h6 class="card-title">{{ proUser.jobCategory }}</h6>
+                    <hr>
+                    <p class="card-text">
+                        {{ proUser.address }}
+                    </p>
+                    <a href="{{ path('proUser_show', {'slug' : proUser.slug }) }}" class="btn btn-primary">Plus d'informations</a>
+                </div>
+            </div>    
+</div>

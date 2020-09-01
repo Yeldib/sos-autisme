@@ -19,15 +19,15 @@ class ProUserRepository extends ServiceEntityRepository
         parent::__construct($registry, ProUser::class);
     }
 
-    // public function search($jobCategory)
-    // {
-    //     return $this->createQueryBuilder('ProUser')
-    //         ->andWhere('ProUser.jobCategory LIKE :jobCategory')
-    //         ->setParameter('jobCategory','%'.$jobCategory.'%')
-    //         ->getQuery()
-    //         ->execute()
-    //     ;
-    // }
+    public function search($jobCategory)
+    {
+        return $this->createQueryBuilder('ProUser')
+            ->andWhere('ProUser.jobCategory LIKE :jobCategory')
+            ->setParameter('jobCategory','%'.$jobCategory.'%')
+            ->getQuery()
+            ->execute()
+        ;
+    }
 
 
     /*

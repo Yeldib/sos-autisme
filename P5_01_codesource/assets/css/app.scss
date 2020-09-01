@@ -1,7 +1,8 @@
 @import url('./bootstrap.min.css');
 @import "variables";
 
-.container-fluid {
+
+.container-fluid, .container {
     padding-right: 0;
     padding-left: 0;
     margin-right: auto;
@@ -10,7 +11,7 @@
 
 #navbar-front{
 
-    background-color: $colorPrimary;
+    background: linear-gradient(to bottom, $colorPrimary, #0288d182) ;
 
     a {
         color: $textLight;
@@ -22,6 +23,17 @@
 
     #navbar-dropdown-front a {
         color: $textDark;
+    }
+
+    .fa-bars{
+        color: $textLight;
+    }
+
+    @media screen and (max-width: 1000px){
+        .nav-link-home{
+            margin-left: 0px;
+            margin-top: 52px;
+        }
     }
 }
 
@@ -76,7 +88,7 @@ span.rating i {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/images/bcImageSearch.jpg');
+    background: linear-gradient(#00000033, #000000b0);
     background-position: center;
     background-size: cover;
     font-family: "roboto", cursive;
@@ -139,3 +151,69 @@ span.rating i {
         margin-left: 15px;
     }
 }    
+
+.bloc-slider{
+    position: relative;
+    width: 100%;
+    background: linear-gradient(#00000033, #000000b0);
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 125px;
+
+    #diaporama{
+        margin: 0 auto;
+    }
+
+    .img-format{
+        width: 50%;
+        height: 352px;
+        border-radius: 5%;
+        box-shadow: 2px 4px 13px #000000;
+    }
+
+    i {
+        position: absolute;
+        opacity: 0;
+        transition: opacity .5s ease-in-out, text-shadow .5s ease-in-out;
+        color: $textLight;
+        font-size: 21px;
+        cursor: pointer
+    }
+
+    &:hover i {
+        opacity: 1;
+        transition: opacity .5s ease-in-out, text-shadow .5s ease-in-out;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, .513)
+    }
+
+    .fa-chevron-left {
+        bottom: 2%;
+        left: 12%;
+    }
+
+    .fa-chevron-right {
+        bottom: 2%;
+        right: 12%
+    }
+
+    .fa-pause, .fa-play {
+        bottom: 2%;
+        right: 49%
+    }
+
+    button {
+        border: none;
+        background: 0 0;
+        outline: 0
+    }
+
+    #texte-diaporama {
+        position: absolute;
+        top: 2%;
+        text-shadow: 1px 2px 3px black;
+        right: 4%;
+        max-width: 40%;
+        font-size: 1.5rem;
+        color: #f6f7ff;
+    }
+}
