@@ -98,17 +98,18 @@ class Diaporama {
 // Param 3- Afficher déscription de l'image (option)
 // Param 4- Choisir une durée
 
+
 const slide = new Diaporama(
   "diaporama",
   [
-    "/images/intelligence.jpg",
-    "/images/mental-health.png",
+    "/images/banniere_autisme.jpg",
+    "/images/capture.png",
     "/images/girlBulle.jpg"
   ],
 
   [
-    "QUI SOMMES-NOUS ET QUEL EST LE BUT DE CE SITE ? Nous sommes parents de deux enfants diagnostiqués autistes et le but de ce site est qu'en quelques clics les parents puissent trouver tous les professionnels de l'autisme dont ils ont besoin",
-    "CONTENU 2",
+    `QUI SOMMES-NOUS ET QUEL EST LE BUT DE CE SITE ?  Nous sommes parents de deux enfants diagnostiqués autistes et le but de ce site est qu'en quelques clics les parents puissent trouver tous les professionnels de l'autisme dont ils ont besoin`,
+    "COMMENT UTILISER LE SITE ? C'est très simple, il vous suffit dans la barre de recherche ci-dessous de selectionner une profession et un département puis de cliquer sur le bouton rechercher.",
     "COMMENT NOUS AIDER ? Diffuser au maximum autour de vous l’adresse de ce site. Vous connaissez des professionnels de l’autisme ? N’hésitez pas à nous contacter."
   ],
 

@@ -15,10 +15,10 @@
 	{% endfor %}
 
 	{# diapo #}
-	<div class="container bloc-slider">
+	<div class="container-fluid bloc-slider">
 		<div class="btn-diaporama">
 			<div id="diaporama">
-				<img src="/images/intelligence.jpg" class="img-format" alt="images diaporama" />
+				<img src="/images/banniere_autisme.jpg" class="img-format" alt="images diaporama" />
 				<p id="texte-diaporama">
 					QUI SOMMES-NOUS ET QUEL EST LE BUT DE CE SITE ? Nous sommes parents de deux enfants diagnostiqués autistes et le but de ce site est qu'en quelques clics les parents puissent trouver tous les professionnels de l'autisme dont ils ont besoin.
 				</p>
@@ -33,18 +33,20 @@
 	{# Barre de recherche #}
 	<section class="data-search">
 	{{ form_start(form) }}	
-			<div class="form-group">
-				<div class="input-group">
-					{{ form_widget(form.jobCategory) }}
-				    {{ form_widget(form.department) }}	
-					<button type="submit" class="btn"><i class="fas fa-search"></i></button>
-                </div>
-            </div> 
+	<h2 class="h4 text-center mb-4">Quel professionnel recherchez vous ?</h2>
+	<hr>
+		<div class="form-group col-sm">
+			<div class="input-group">
+				{{ form_widget(form.jobCategory) }}
+				{{ form_widget(form.department) }}	
+				<button type="submit" class="btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div> 
 	{{ form_end(form) }}
     </section>
 
 	{# Prévisualisation de la fiche du professionnel #}
-	<section class="container">
+	<section class="container card-pro">
 		{% for proUser in users %}
 			{% include "proUser/_card.html.twig" with {proUser : proUser} only %}
 		{% endfor %}

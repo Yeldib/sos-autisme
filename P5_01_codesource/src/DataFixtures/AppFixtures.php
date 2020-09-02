@@ -29,7 +29,8 @@ class AppFixtures extends Fixture
         $manager->persist($adminRole);
 
         $adminUser = new User();
-        $adminUser->setFirstName('Ethan')
+        $adminUser->setPseudo('Ethan27140')
+                  ->setFirstName('Ethan')
                   ->setLastName('EL DIB')
                   ->setEmail('e.ethan@gmail.com')
                   ->setHash($this->encoder->encodePassword($adminUser, 'password'))
@@ -77,7 +78,7 @@ class AppFixtures extends Fixture
         $genres = ['male', 'female'];
         $jobs = ['Orthophoniste', 'Pédopsychiatre', 'Éducateur(trice) spécialisé(e)', 'Psychomotricien(ne)', 'Psychologue'];
 
-        for ($i=1; $i <= 55; $i++) { 
+        for ($i=1; $i <= 75; $i++) { 
             $user = new User();
 
             $genre = $faker->randomElement($genres);
@@ -89,7 +90,7 @@ class AppFixtures extends Fixture
 
             $hash = $this->encoder->encodePassword($user, 'password');
 
-            $user->setPseudo($faker->userName())
+            $user->setPseudo($faker->firstName($genre))
                  ->setLastName($faker->lastName())
                  ->setFirstName($faker->firstName($genre))
                  ->setEmail($faker->email())

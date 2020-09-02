@@ -2,22 +2,22 @@
 @import "variables";
 
 
-.container-fluid, .container {
+.container-fluid {
     padding-right: 0;
     padding-left: 0;
     margin-right: auto;
     margin-left: auto;
 }
 
-#navbar-front{
+#navbar-front {
 
-    background: linear-gradient(to bottom, $colorPrimary, #0288d182) ;
+    background: linear-gradient(-2deg, #000000, #0288d1);
 
     a {
         color: $textLight;
     }
 
-    .nav-link-home{
+    .nav-link-home {
         margin-left: 70px;
     }
 
@@ -25,12 +25,12 @@
         color: $textDark;
     }
 
-    .fa-bars{
+    .fa-bars {
         color: $textLight;
     }
 
-    @media screen and (max-width: 1000px){
-        .nav-link-home{
+    @media screen and (max-width: 1000px) {
+        .nav-link-home {
             margin-left: 0px;
             margin-top: 52px;
         }
@@ -79,7 +79,6 @@ span.rating i {
     color: goldenrod;
 }
 
-
 .data-search {
     width: 80%;
     margin: 0 auto;
@@ -88,10 +87,14 @@ span.rating i {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(#00000033, #000000b0);
+    background: linear-gradient(#0000002e, #f1ececc9);
     background-position: center;
     background-size: cover;
     font-family: "roboto", cursive;
+
+    h2 {
+        margin-top: -145px;
+    }
 
     .input-group {
         display: flex;
@@ -100,10 +103,10 @@ span.rating i {
     }
 
     .form-control {
-        height: 50px;
+        height: 73px;
         border: none;
         outline: none;
-        font-size: 1em;
+        font-size: 1.5em;
         font-weight: 500;
         background: #fdfdfd;
         transition: .3s ease;
@@ -115,7 +118,7 @@ span.rating i {
     }
 
     .btn {
-        height: 50px;
+        height: 73px;
         border: none;
         width: 55px;
         outline: none;
@@ -134,11 +137,41 @@ span.rating i {
     .btn:hover {
         box-shadow: inset 0 0 100px rgba(221, 219, 219, 0.829);
     }
+
+    .form-group {
+        margin-bottom: -7rem;
+        margin-top: 5rem;
+    }
+
+    @media screen and (max-width:750px) {
+
+        width: 100%;
+        height: 70vh;
+
+        h2 {
+            margin-top: -120px;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            width: 37%;
+            height: 37px;
+            margin: 0 auto;
+            margin-top: 15px;
+        }
+    }
 }
 
 .logo {
     max-width: 114px;
     max-height: 114px;
+    z-index: 9999;
     border-radius: 50%;
     position: absolute;
     top: 13px;
@@ -150,25 +183,23 @@ span.rating i {
         max-height: 148px;
         margin-left: 15px;
     }
-}    
+}
 
-.bloc-slider{
+.bloc-slider {
     position: relative;
     width: 100%;
-    background: linear-gradient(#00000033, #000000b0);
-    border-radius: 20px;
-    margin-top: 50px;
+    background: linear-gradient(#0000002e, #f1ececc9);
+    border-radius: 2px;
     margin-bottom: 125px;
 
-    #diaporama{
+    #diaporama {
         margin: 0 auto;
     }
 
-    .img-format{
-        width: 50%;
-        height: 352px;
-        border-radius: 5%;
-        box-shadow: 2px 4px 13px #000000;
+    .img-format {
+        width: 45%;
+        height: 474px;
+        border-radius: 4px;
     }
 
     i {
@@ -196,7 +227,8 @@ span.rating i {
         right: 12%
     }
 
-    .fa-pause, .fa-play {
+    .fa-pause,
+    .fa-play {
         bottom: 2%;
         right: 49%
     }
@@ -209,11 +241,57 @@ span.rating i {
 
     #texte-diaporama {
         position: absolute;
-        top: 2%;
-        text-shadow: 1px 2px 3px black;
+        top: 14%;
+        text-shadow: 1px 2px 3px #edeaea;
         right: 4%;
-        max-width: 40%;
+        max-width: 47%;
         font-size: 1.5rem;
-        color: #f6f7ff;
+        color: #202020;
+    }
+
+    @media screen and (max-width:750px) {
+
+        #texte-diaporama {
+            font-size: 1rem;
+            max-width: 100%;
+            display: contents;
+        }
+
+        .img-format {
+            width: 100%;
+            height: 220px;
+        }
+    }
+}
+
+.card-pro {
+    display: flex;
+    justify-content: space-around;
+
+    @media screen and (max-width:750px) {
+        display: block;
+    }
+}
+
+
+#footer {
+    position: relative;
+    background: linear-gradient(7deg, #000000, #0288d1);
+    margin-top: 150px;
+
+    img {
+        position: absolute;
+        top: -36px;
+        max-width: 130px;
+    }
+
+    p {
+        color: $textLight;
+    }
+
+    @media screen and(max-width:750px) {
+        div.container {
+            text-align: end !important;
+        }
     }
 }

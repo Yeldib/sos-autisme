@@ -40,7 +40,7 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: chain_provider
+            provider: in_database_user
 
             form_login:
                 login_path: account_login
@@ -49,6 +49,19 @@ security:
             logout:
                 path: account_logout
                 target: account_login
+        pro:
+            anonymous: true
+            lazy: true
+            provider: in_database_proUser
+
+            form_login:
+                login_path: account_login_pro
+                check_path: account_login_pro
+            
+            logout:
+                path: account_logout
+                target: account_login_pro
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
