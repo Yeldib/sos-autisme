@@ -3,17 +3,7 @@
 {% block title %}Bienvenue sur notre site.
 {% endblock %}
 
-
 {% block body %}
-	{# messages de notification #}
-	{% for message in app.flashes('success') %}
-		<div class="container mt-5">
-			<div class="alert alert-success">
-				{{ message }}
-			</div>
-		</div>
-	{% endfor %}
-
 	{# diapo #}
 	<div class="container-fluid bloc-slider">
 		<div class="btn-diaporama">

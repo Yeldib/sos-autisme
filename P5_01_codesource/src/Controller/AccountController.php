@@ -43,7 +43,7 @@ class AccountController extends AbstractController
     /**
      * Permet d'afficher et de gérer le formulaire de connexion d'un professionnel
      * 
-     * @Route("/login/pro-user", name="account_login_pro")
+     * @Route("/pro/login/", name="account_login_pro")
      * 
      * @return Response
      */
@@ -51,6 +51,8 @@ class AccountController extends AbstractController
     {
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
+
+        // return $this->redirectToRoute('account_index_pro');
 
         return $this->render('account/loginProUser.html.twig', [
             'hasError' => $error !== null,
@@ -66,6 +68,18 @@ class AccountController extends AbstractController
      * @return void
      */
     public function logout()
+    {
+        # deconnexion
+    }
+
+    /**
+     * Permet de se déconnecter
+     * 
+     * @Route("/pro/logout", name="account_logout_pro")
+     *
+     * @return void
+     */
+    public function logoutPro()
     {
         # deconnexion
     }
@@ -143,7 +157,7 @@ class AccountController extends AbstractController
     /**
      * Permet d'afficher et de traiter le formulaire de modification du profil d'un professionnel
      * 
-     * @Route("/account-pro/profile", name="account_profile_pro")
+     * @Route("/pro/account/profile", name="account_profile_pro")
      * @Security("is_granted('ROLE_PRO_USER')")
      *
      * @return Response
@@ -247,17 +261,33 @@ class AccountController extends AbstractController
         ]);
     }
 
+
     /**
      * Permet d'afficher le profil de l'utilisateur connecté
      * 
      * @Route("/account", name="account_index")
-     * @Security("is_granted('ROLE_USER') or is_granted('ROLE_PRO_USER')")
+     * @Security("is_granted('ROLE_USER')")
      *
      * @return Response
      */
     public function myAccount()
     {
         return $this->render('user/indexAccount.html.twig', [
+            'user' => $this->getUser(),
+        ]);
+    }
+
+    /**
+     * Permet d'afficher le profil du professionnel connecté
+     * 
+     * @Route("/pro/account", name="account_index_pro")
+     * @Security("is_granted('ROLE_PRO_USER')")
+     *
+     * @return Response
+     */
+    public function myAccountPro()
+    {
+        return $this->render('user/indexAccountPro.html.twig', [
             'user' => $this->getUser(),
         ]);
     }

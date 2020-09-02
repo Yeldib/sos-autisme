@@ -1,7 +1,9 @@
 <header>
     <nav class="navbar navbar-expand-lg" id="navbar-front">
         <a class="navbar-brand" id="link-logo" href="{{ path('homepage') }}">
-            <img src="/images/logo_sos_autisme.png" class="logo" alt="logo de sos-autisme">
+            {# logo animé #}
+            <div class="logo effect-logo"><img src="/images/logo_sos_autisme.png"  alt="logo de sos-autisme"></div>
+            {# <img src="/images/logo_sos_autisme.png"  alt="logo de sos-autisme"> #}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span><i class="fas fa-bars fa-2x"></i></span>
@@ -34,8 +36,16 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" id="navbar-dropdown-front" aria-labelledby="accountDropdownLink">
-                            <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
-                            <a href="{{ path('account_profile') }}" class="dropdown-item">Modifier mon profil</a>
+                            {% if is_granted('ROLE_PRO_USER') %}
+                                <a href="{{ path('account_index_pro') }}" class="dropdown-item">Mon compte</a>
+                            {% else %}
+                                <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>    
+                            {% endif %}
+                            {% if is_granted('ROLE_PRO_USER') %}
+                                <a href="{{ path('account_profile_pro') }}" class="dropdown-item">Modifier mon profil</a>
+                            {% else %}
+                                <a href="{{ path('account_profile') }}" class="dropdown-item">Modifier mon profil</a>
+                            {% endif %}
                             <div class="dropdown-divider"></div>
                             <a href="{{ path('account_logout') }}" class="dropdown-item">Déconnexion</a>
                         </div>

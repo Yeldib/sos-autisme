@@ -91,6 +91,7 @@ class Diaporama {
       this.eltPause.className = "fas fa-pause";
     }
   }
+
 }
 
 // Param 1- Mettre votre id 
