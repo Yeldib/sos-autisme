@@ -87,7 +87,7 @@ class AccountController extends AbstractController
     /**
      * Permet d'afficher le formulaire d'inscription pour un professionnel
      * 
-     * @Route("/pro-register", name="account_register_pro")
+     * @Route("/register-pro", name="account_register_pro")
      *
      * @return Response
      */

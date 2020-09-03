@@ -13,8 +13,10 @@ import '../css/app.scss';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+// console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
 // inmportation des fichier js nécessaire
-require('bootstrap');
-require('./diaporama.js');
+import 'bootstrap';
+import './diaporama';
+import './onglet';
+

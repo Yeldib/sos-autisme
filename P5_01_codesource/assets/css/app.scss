@@ -66,17 +66,8 @@
     font-size: 28px;
 }
 
-.modal-body i {
-    font-size: 45px;
-    margin-bottom: 10px;
-}
-
 #badgeJob {
     font-size: 13px;
-}
-
-.modal-dialog {
-    max-width: 615px;
 }
 
 span.rating i {
@@ -216,8 +207,8 @@ span.rating i {
         position: absolute;
         opacity: 0;
         transition: opacity .5s ease-in-out, text-shadow .5s ease-in-out;
-        color: $textLight;
-        font-size: 21px;
+        color: #027CBF;
+        font-size: 35px;
         cursor: pointer
     }
 
@@ -311,7 +302,7 @@ span.rating i {
             color: $textDark;
         }
 
-        a:hover{
+        a:hover {
             background-color: $colorSecondary;
             transition: 0.2s ease-in-out;
             color: white;
@@ -322,6 +313,56 @@ span.rating i {
         display: block;
     }
 }
+
+#panneau {
+ 
+    i {
+        font-size: 55px;
+        margin-bottom: 15px;
+    }
+
+    #onglets li {
+        width: 100%;
+        list-style: none;
+        text-align: center;
+        color: grey;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    #onglets li.actif {
+        color: $colorPrimary;
+
+    }
+
+    #contenus li {
+        background: white;
+        width: 500px;
+        padding: 20px;
+        display: none;
+    }
+
+    #contenus li.actif {
+        display: block;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .scale-i:hover{
+        transform: scale(1.05);
+        transition: 0.2s ease-in;
+    }
+}
+
+#carte {
+    height: 40vh;
+    width: 80vh;
+}
+
 
 .bloc-card-usefullLink {
 

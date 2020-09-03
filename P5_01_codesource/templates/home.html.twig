@@ -8,39 +8,50 @@
 	<div class="container-fluid bloc-slider">
 		<div class="btn-diaporama">
 			<div id="diaporama">
-				<img src="/images/banniere_autisme.jpg" class="img-format" alt="images diaporama" />
+				<img src="/images/banniere_autisme.jpg" class="img-format" alt="images diaporama"/>
 				<p id="texte-diaporama">
 					QUI SOMMES-NOUS ET QUEL EST LE BUT DE CE SITE ? Nous sommes parents de deux enfants diagnostiqués autistes et le but de ce site est qu'en quelques clics les parents puissent trouver tous les professionnels de l'autisme dont ils ont besoin.
 				</p>
-				<button><i class="fas fa-pause"></i></button>
-				<button class="btn-prec"><i class="fas fa-chevron-left"></i></button>
-				<button class="btn-suiv"><i class="fas fa-chevron-right"></i>
+				<button>
+					<i class="fas fa-pause"></i>
+				</button>
+				<button class="btn-prec">
+					<i class="fas fa-chevron-left"></i>
+				</button>
+				<button class="btn-suiv">
+					<i class="fas fa-chevron-right"></i>
 				</button>
 			</div>
 		</div>
 	</div>
 
 	<blockquote class="blockquote text-center mt-3 mb-5 col-6 mx-auto ">
-			<p class="mb-0"><i class="fas fa-quote-left"></i> Nous sommes tous des génies. Mais si on juge un poisson par son aptitude à grimper dans un arbre, il passera sa vie à croire qu'il est stupide. <i class="fas fa-quote-right"></i></p>
-			<footer class="blockquote-footer">
-				<cite title="Source Title">Albert Einstein</cite>
-			</footer>
-		</blockquote>
-	
+		<p class="mb-0">
+			<i class="fas fa-quote-left"></i>
+			Nous sommes tous des génies. Mais si on juge un poisson par son aptitude à grimper dans un arbre, il passera sa vie à croire qu'il est stupide.
+			<i class="fas fa-quote-right"></i>
+		</p>
+		<footer class="blockquote-footer">
+			<cite title="Source Title">Albert Einstein</cite>
+		</footer>
+	</blockquote>
+
 	{# Barre de recherche #}
 	<section class="data-search">
-	{{ form_start(form) }}	
-	<h2 class="h4 text-center mb-4">Quel professionnel recherchez vous ?</h2>
-	<hr>
+		{{ form_start(form) }}
+		<h2 class="h4 text-center mb-4">Quel professionnel recherchez vous ?</h2>
+		<hr>
 		<div class="form-group col-sm">
 			<div class="input-group">
 				{{ form_widget(form.jobCategory) }}
-				{{ form_widget(form.department) }}	
-				<button type="submit" class="btn"><i class="fas fa-search"></i></button>
-            </div>
-        </div> 
-	{{ form_end(form) }}
-    </section>
+				{{ form_widget(form.department) }}
+				<button type="submit" class="btn">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</section>
 
 	{# Prévisualisation de la fiche du professionnel #}
 	<section class="container card-pro">
@@ -49,4 +60,4 @@
 		{% endfor %}
 	</section>
 
-	{% endblock %}
+{% endblock %}

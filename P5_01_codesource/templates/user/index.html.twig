@@ -29,7 +29,7 @@
 			</div>
 
 		</div>
-        <h5 class="mt-5 mb-3">Description</h5>
+		<h5 class="mt-5 mb-3">Description</h5>
 		{% if u.description %}
 			{{ u.description | raw }}
 		{% else %}
@@ -37,37 +37,51 @@
 				<p>
 					<strong>{{ u.fullName }}</strong>
 					n'a pas encore de déscription sur le site.
-                </p>
+				</p>
 			</div>
 		{% endif %}
 		<hr>
 
-		<div class="modal-dialog bg-dark mt-5" role="document">
-			<div class="modal-content text-center ">
-				<div class="modal-header bg-dark ">
-					<h5 class="text-light ">Coordonnées du professionnel</h5>
-				</div>
-				<div class="modal-body d-lg-flex d-md-flex justify-content-around">
-					<p><i class="fas fa-map-marked-alt"></i>
-						<br>
-						{{ u.address }}
-						<br>
-						{{ u.postalCode }}
-						<br>
-						{{ u.city }}
-                    </p>
-					<p><i class="fas fa-phone-square"></i>
-                        <br>
-						{{ u.phoneNumber }}
-                    </p>
-					<p><i class="fas fa-at"></i>
-                        <br>
-						{{ u.email }}
-					</p>
-				</div>
-				<div class="modal-footer"></div>
+		{# Onglet #}
+		<div id="panneau" class="modal-dialog mt-5" role="document">
+			<div class="modal-content text-center rounded ">
+				<ul id="onglets" class="clearfix modal-header ">
+					<li class="scale-i">
+						<i class="fas fa-map-marked-alt"></i>
+					</li>
+					<li class="scale-i">
+						<i class="fas fa-phone-square"></i>
+					</li>
+					<li class="scale-i">
+						<i class="fas fa-at"></i>
+					</li>
+	
+				</ul>
+				<ul id="contenus" class="modal-body d-lg-flex d-md-flex justify-content-around">
+					<li>
+						<p>
+							<br>
+							{{ u.address }}
+							<br>
+							{{ u.postalCode }}
+							<br>
+							{{ u.city }}
+						</p>
+					</li>
+					<li>
+						<p><br>
+							{{ u.phoneNumber }}
+						</p>
+					</li>
+					<li>
+						<p><br>
+							{{ u.email }}
+						</p>
+					</li>
+				</ul>
 			</div>
 		</div>
+
 		<hr>
 
 		{% if app.user %}
@@ -75,30 +89,33 @@
 				<h2 class="alert alert-heading">Laissez un commentaire</h2>
 				{{ form_start(form) }}
 				{{ form_widget(form) }}
-					<button type="submit" class="btn btn-success btn-md">Confirmer</button>
+				<button type="submit" class="btn btn-success btn-md">Confirmer</button>
 				{{ form_end(form) }}
 			</div>
 		{% else %}
 			<div class="alert alert-warning">
-				<h4 class="alert alert-heading">Il faut être connecté pour donner votre avis</h4>
+				<h5 class="alert alert-heading">Il faut être connecté pour donner votre avis</h5>
 			</div>
 		{% endif %}
 
 		<hr>
 
 		{% if proUser.comments | length > 0 %}
-			<h2 class="mb-3">Commentaires sur ce praticien :</h2>
+			<h5 class="mb-3">Commentaires sur ce praticien :</h5>
 
 			<div class="alert alert-info">
 				<h4 class="alert-heading text-center">
 					<div class="row align-items-center">
 						<div class="col">
-							Note globale du praticien 	
+							Note globale du praticien
 						</div>
 						<div class="col">
 							{% include "partials/rating.html.twig" with {'rating' : proUser.avgRatings} %}
 							<br>
-							<small>(Moyenne sur {{ proUser.comments | length }} avis) </small>
+							<small>(Moyenne sur
+								{{ proUser.comments | length }}
+								avis)
+							</small>
 						</div>
 					</div>
 				</h4>
@@ -106,18 +123,25 @@
 
 			{% for comment in proUser.comments %}
 				<div class="bg-light rounded mb-3 py-3 px-3">
-					<strong class="text-primary"> {{ comment.author.firstName }} </strong> a dit :
+					<strong class="text-primary">
+						{{ comment.author.firstName }}
+					</strong>
+					a dit :
 					<blockquote class="blockquote">
 						{{ comment.content }}
 					</blockquote>
 					<strong class="text-primary">Note donnée :</strong>
 
 					{% include "partials/rating.html.twig" with {'rating' : comment.rating} %}
-				</div>		
+				</div>
 			{% endfor %}
 		{% else %}
-			<h2>Ce praticien n'a pas encore reçu de commentaires.</h2>
+			<h5>Ce praticien n'a pas encore reçu de commentaires.</h5>
 		{% endif %}
 	</div>
 
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('onglet') }}
+	<script type="text/javascript">onglet();</script>
 {% endblock %}
