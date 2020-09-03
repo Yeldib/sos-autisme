@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page du profil de{{ proUser.fullName }}{% endblock %}
+{% block title %}Page du profil de{{ proUser.fullName }}
+{% endblock %}
 
 {% block body %}
 
@@ -55,26 +56,23 @@
 					<li class="scale-i">
 						<i class="fas fa-at"></i>
 					</li>
-	
+
 				</ul>
 				<ul id="contenus" class="modal-body d-lg-flex d-md-flex justify-content-around">
 					<li>
 						<p>
-							<br>
 							{{ u.address }}
-							<br>
 							{{ u.postalCode }}
-							<br>
 							{{ u.city }}
 						</p>
 					</li>
 					<li>
-						<p><br>
+						<p>
 							{{ u.phoneNumber }}
 						</p>
 					</li>
 					<li>
-						<p><br>
+						<p>
 							{{ u.email }}
 						</p>
 					</li>
@@ -143,5 +141,7 @@
 {% endblock %}
 {% block javascripts %}
 	{{ encore_entry_script_tags('onglet') }}
-	<script type="text/javascript">onglet();</script>
+	<script type="text/javascript">
+		onglet();
+	</script>
 {% endblock %}

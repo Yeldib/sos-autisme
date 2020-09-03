@@ -46,12 +46,12 @@ class Stats {
    {
         return $this->manager
                     ->createQuery(
-                    'SELECT AVG(c.rating) as note, p.firstName, p.lastName, p.id, p.jobCategory, p.picture
-                    FROM App\Entity\Comment c
-                    JOIN c.proUser p
-                    JOIN c.author u
-                    GROUP BY p
-                    ORDER BY note ' . $direction
+                     'SELECT AVG(c.rating) as note, p.firstName, p.lastName, p.id, p.jobCategory, p.picture
+                     FROM App\Entity\Comment c
+                     JOIN c.proUser p
+                     JOIN c.author u
+                     GROUP BY p
+                     ORDER BY note ' . $direction
                     )
                     ->setMaxResults(4)
                     ->getResult();
