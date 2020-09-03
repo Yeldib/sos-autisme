@@ -47,7 +47,7 @@ class AccountController extends AbstractController
      * 
      * @return Response
      */
-    public function loginProUser(AuthenticationUtils $utils)
+    public function loginProUser(AuthenticationUtils $utils, Request $request)
     {
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
@@ -178,6 +178,8 @@ class AccountController extends AbstractController
                 'success',
                 "Vos modifications on bien été enregistrée."
             );
+
+            return $this->redirectToRoute('pro_user_dashboard');
         }
 
         return $this->render('account/profileProUser.html.twig', [
@@ -217,10 +219,10 @@ class AccountController extends AbstractController
     }
 
     /**
-     * Permet de mofifier le mot de passe
+     * Permet de mofifier le mot de passe de l'utilisateur
      * 
      * @Route("/account/password-update", name="account_password")
-     * @Security("is_granted('ROLE_USER') or is_granted('ROLE_PRO_USER')")
+     * @Security("is_granted('ROLE_USER')")
      *
      * @return Response
      */
@@ -257,6 +259,51 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/password.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+     /**
+     * Permet de mofifier le mot de passe de l'utilisateur pro
+     * 
+     * @Route("/pro/account/password-update", name="account_password_pro")
+     * @Security("is_granted('ROLE_PRO_USER')")
+     *
+     * @return Response
+     */
+    public function updatePasswordPro(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    {
+        $passwordUpdate = new PasswordUpdate();
+
+        $proUser = $this->getUser();
+
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 1. Vérifier si le oldpassword du formulaire soit identique au password de l'utilisateur
+            if (!password_verify($passwordUpdate->getOldPassword(), $proUser->getHash())) {
+                // Gestion de l'erreur
+                $form->get('oldPassword')->addError(new FormError("Le mot de passe indiqué n'est pas votre mot de passe actuel."));
+            }else {
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $encoder->encodePassword($proUser, $newPassword);
+
+                $proUser->setHash($hash);
+                $manager->persist($proUser);
+                $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    "Votre mot de passe a bien été modifié."
+                );
+
+                return $this->redirectToRoute('pro_user_dashboard');
+            }
+        }
+
+        return $this->render('proUser/dashboard/password.html.twig', [
             'form' => $form->createView()
         ]);
     }

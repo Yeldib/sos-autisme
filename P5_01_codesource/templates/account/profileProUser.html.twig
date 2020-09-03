@@ -1,19 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'proUser/base.html.twig' %}
 
 {% block title %}Modification du profil{% endblock %}
 
 {% block body %}
 
-    <div class="container">
-        <h1>Modification du profil</h1>
+        <div class="container">
+        <h1 class="my-5 text-center">Modification du profil</h1>
 
         {{form_start(form)}}
 
-        {{form_widget(form)}}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Informations générales</h2>
+                    <hr>
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.jobCategory) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.picture) }}
+                </div>
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Votre déscription</h2>
+                    {{ form_row(form.description) }}
+                </div>
+            </div>
 
-        <button type="submit" class="btn btn-primary btn-md">Valider vos modifications</button>
-        
-        {{form_end(form)}}
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="h5 text-center">Vos coordonnées</h2>
+                    <hr>
+                    {{ form_row(form.address) }}
+                    {{ form_row(form.city) }}
+                    {{ form_row(form.postalCode) }}
+                    {{ form_row(form.department) }}
+                    {{ form_row(form.phoneNumber) }}
+                    {{ form_row(form.companySiret) }}
+                </div>
+                 
+            </div>
+        </div>
+        <div class="alert alert-success clearfix ">
+            <h2 class="alert alert-heading h5">Modifier votre profil</h2>
+            <p>Vous êtes sur le point de finaliser vos modifications.</p>
+            <button type="submit" class="btn btn-secondary btn-md float-right ">
+                <i class="fas fa-check"></i>
+                 Modifier
+            </button>
+            {{form_end(form)}} 
+        </div>
     </div>
 
 {% endblock %}

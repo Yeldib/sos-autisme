@@ -19,6 +19,13 @@
 			</div>
 		</div>
 	</div>
+
+	<blockquote class="blockquote text-center mt-3 mb-5 col-6 mx-auto ">
+			<p class="mb-0"><i class="fas fa-quote-left"></i> Nous sommes tous des génies. Mais si on juge un poisson par son aptitude à grimper dans un arbre, il passera sa vie à croire qu'il est stupide. <i class="fas fa-quote-right"></i></p>
+			<footer class="blockquote-footer">
+				<cite title="Source Title">Albert Einstein</cite>
+			</footer>
+		</blockquote>
 	
 	{# Barre de recherche #}
 	<section class="data-search">
@@ -38,7 +45,7 @@
 	{# Prévisualisation de la fiche du professionnel #}
 	<section class="container card-pro">
 		{% for proUser in users %}
-			{% include "proUser/_card.html.twig" with {proUser : proUser} only %}
+			{% include "proUser/partials/_card.html.twig" with {proUser : proUser} only %}
 		{% endfor %}
 	</section>
 

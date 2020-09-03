@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/pro-user/{slug}", name="proUser_show")
+     * @Route("/user-pro/{slug}", name="proUser_show")
      * 
      * @param ProUser $proUser
      * @param Request $request

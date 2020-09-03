@@ -18,7 +18,7 @@
     }
 
     .nav-link-home {
-        margin-left: 70px;
+        margin-left: 82px;
     }
 
     #navbar-dropdown-front a {
@@ -86,7 +86,7 @@ span.rating i {
 .data-search {
     width: 80%;
     margin: 0 auto;
-    height: 40vh;
+    height: 54vh;
     border-radius: 7px;
     display: flex;
     justify-content: center;
@@ -284,6 +284,40 @@ span.rating i {
     display: flex;
     justify-content: space-around;
 
+    .card {
+        background: linear-gradient(113deg, #00476d, #0272af);
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    #link-fullname p:hover {
+        transform: scale(1.03);
+        transition: 0.5s ease-in-out;
+    }
+
+    img,
+    i {
+        box-shadow: 0px 0px 3px black;
+    }
+
+    #btn-card {
+
+        a {
+            width: 100%;
+            background-color: $textLight;
+            border-radius: 7px;
+            color: $textDark;
+        }
+
+        a:hover{
+            background-color: $colorSecondary;
+            transition: 0.2s ease-in-out;
+            color: white;
+        }
+    }
+
     @media screen and (max-width:750px) {
         display: block;
     }
@@ -308,7 +342,8 @@ span.rating i {
         }
     }
 
-    p, li {
+    p,
+    li {
         color: black;
     }
 }
@@ -317,6 +352,22 @@ span.rating i {
 
     p {
         font-size: 1.2rem;
+    }
+}
+
+#bloc-profile-account-prouser {
+
+    .fa-certificate {
+        color: goldenrod;
+        font-size: 2.4rem;
+        opacity: 0.5;
+        position: absolute;
+        top: -7px;
+        left: 16px;
+    }
+
+    p {
+        z-index: 2;
     }
 }
 
@@ -385,6 +436,30 @@ span.rating i {
 
 .logo.effect-logo:hover:after {
     animation: sonar 0.9s ease-in-out 75ms;
+}
+
+.aboutus-section {
+    img {
+        width: 100%;
+    }
+
+    p {
+        color: black;
+        font-size: 1.2rem;
+    }
+
+    i {
+        color: $textDark;
+    }
+
+    cite {
+        color: $textDark;
+    }
+
+    h4,
+    h2 {
+        color: $textDark;
+    }
 }
 
 @keyframes sonar {

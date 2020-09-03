@@ -47,6 +47,7 @@ security:
             form_login:
                 login_path: account_login_pro
                 check_path: account_login_pro
+                default_target_path: pro_user_dashboard
             
             logout:
                 path: account_logout_pro
