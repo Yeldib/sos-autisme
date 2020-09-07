@@ -287,8 +287,7 @@ span.rating i {
         transition: 0.5s ease-in-out;
     }
 
-    img,
-    i {
+    img {
         box-shadow: 0px 0px 3px black;
     }
 
@@ -310,51 +309,6 @@ span.rating i {
 
     @media screen and (max-width:750px) {
         display: block;
-    }
-}
-
-#panneau {
- 
-    i {
-        font-size: 55px;
-        margin-bottom: 15px;
-    }
-
-    #onglets li {
-        width: 100%;
-        list-style: none;
-        text-align: center;
-        color: grey;
-    }
-
-    p {
-        font-size: 1.2rem;
-        
-    }
-
-    #onglets li.actif {
-        color: $colorPrimary;
-
-    }
-
-    #contenus li {
-        background: white;
-        width: 500px;
-        padding: 20px;
-        display: none;
-    }
-
-    #contenus li.actif {
-        display: block;
-    }
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    .scale-i:hover{
-        transform: scale(1.05);
-        transition: 0.2s ease-in;
     }
 }
 
@@ -539,3 +493,184 @@ span.rating i {
         font-size: 1.5rem;
     }
 }
+
+#menu-tab {
+    font-size: 1.2rem;
+    color: black;
+
+    i {
+        font-size: 2rem;
+        color: #044263;
+    }
+
+    a {
+        color: grey;
+        font-weight: normal;
+        font-style: normal;
+        text-decoration: none;
+        font-variant: normal;
+    }
+   
+    #page-wrap {
+        width: 100%;
+        margin: 10px auto;
+    }
+      
+    .tabs {  
+        position: relative;
+        margin-top: 60px;
+        min-height: 335px;
+        clear: both;
+        margin: 25px 0;
+    }
+    
+    .tab {
+        float: left;
+        text-align: center;
+
+        label {
+            width: 100px;
+            border: 1px solid #ccc;
+            margin-left: -1px;
+            position: relative;
+            left: 1px;
+            padding: 11px;
+        }
+
+        & [type=radio] {
+            display: none;
+        }
+
+        #last-label {
+            border-radius: 0px 7px 0px 0px;
+        }
+    }
+
+    label:hover {
+        cursor: pointer;
+    }
+
+    .content {
+        position: absolute;
+        top: 59px;
+        left: 0;
+        background: white;
+        right: 0;
+        bottom: 0;
+        padding-top: 20px;
+        height: 25vh;
+        border: 1px solid #044263;
+        border-top: 3px solid #044263;
+        border-radius: 0px 10px 10px 10px;
+        overflow: hidden;
+        overflow-y: auto;
+
+        &>* {
+            opacity: 0;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translateX(-100%);
+            -moz-transform: translateX(-100%);
+            -ms-transform: translateX(-100%);
+            -o-transform: translateX(-100%);
+            transition: all 0.6s ease;
+            -moz-transition: all 0.6s ease;
+            -ms-transition: all 0.6s ease;
+            -o-transition: all 0.6s ease;
+        }
+    }
+
+    [type=radio]:checked~label { 
+        background: #044263;
+        border-bottom: 1px solid transparent;
+        z-index: 2;
+
+        i{
+            color: white;
+        }
+    }
+    
+    [type=radio]:checked~label~.content {
+        z-index: 1;
+    }
+ 
+    [type=radio]:checked~label~.content>* {
+        opacity: 1;
+        transform: translateX(0); 
+        -moz-transform: translateX(0);    
+        -ms-transform: translateX(0);   
+        -o-transform: translateX(0);   
+    }
+
+    @media screen and (max-width:750px) {
+        i {
+            font-size: 1rem;
+        }
+
+        .content {
+            top: 51px !important;    
+        }
+
+        #menu-tab .tab label {
+            width: 71px;
+            padding: 15px;
+        }
+
+        .tabs {
+            min-height: 250px;
+        }
+
+        h3 {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+#button {
+    display: inline-block;
+    background-color: #0c0268;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s,
+    opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+
+    &::after {
+        content: "\f077";
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 2em;
+        line-height: 50px;
+        color: #fff;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(24, 11, 218);
+        text-decoration: none;
+    }
+
+    &:active {
+        background-color: #555;
+    }
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    @media (min-width: 500px) {
+        #button {
+            margin: 30px;
+        }
+    }
+
+}
+

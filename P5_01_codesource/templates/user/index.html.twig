@@ -44,39 +44,47 @@
 		<hr>
 
 		{# Onglet #}
-		<div id="panneau" class="modal-dialog mt-5" role="document">
-			<div class="modal-content text-center rounded ">
-				<ul id="onglets" class="clearfix modal-header ">
-					<li class="scale-i">
-						<i class="fas fa-map-marked-alt"></i>
-					</li>
-					<li class="scale-i">
-						<i class="fas fa-phone-square"></i>
-					</li>
-					<li class="scale-i">
-						<i class="fas fa-at"></i>
-					</li>
-
-				</ul>
-				<ul id="contenus" class="modal-body d-lg-flex d-md-flex justify-content-around">
-					<li>
-						<p>
-							{{ u.address }}
-							{{ u.postalCode }}
-							{{ u.city }}
-						</p>
-					</li>
-					<li>
-						<p>
-							{{ u.phoneNumber }}
-						</p>
-					</li>
-					<li>
-						<p>
-							{{ u.email }}
-						</p>
-					</li>
-				</ul>
+		<div id="menu-tab">
+			<div id="page-wrap">
+				<div class="tabs">
+					<div class="tab"><input id="tab-1" checked="checked" name="tab-group-1" type="radio"/>
+						<label for="tab-1">
+							<i class="fas fa-map-marked-alt"></i>
+						</label>
+						<div class="content">
+							<h3 class="my-3"><u>Adresse du professionnel</u></h3>
+							<p>
+								{{ u.address }}
+								{{ u.postalCode }}
+								{{ u.city }}
+							</p>
+						</div>
+					</div>
+					<div class="tab"><input id="tab-2" name="tab-group-1" type="radio"/>
+						<label for="tab-2"><i class="fas fa-phone-square"></i></label>
+						<div class="content">
+						<h3 class="my-3"><u>Numéro de télephone</u></h3>
+							<p>
+								{{ u.phoneNumber }}
+							</p>
+						</div>
+					</div>
+					<div class="tab"><input id="tab-3" name="tab-group-1" type="radio"/>
+						<label for="tab-3" id="last-label"><i class="fas fa-at"></i></label>
+						<div class="content">
+						<h3 class="my-3"><u>Adresse email</u></h3>
+							<p>
+								{{ u.email }}
+							</p>
+						</div>
+					</div>
+					{# <div class="tab"><input id="tab-4" name="tab-group-1" type="radio"/>
+						<label for="tab-4" id="last-label">Carte</label>
+						<div class="content">
+							<p>Iti</p>
+						</div>
+					</div> #}
+				</div>
 			</div>
 		</div>
 
@@ -139,9 +147,4 @@
 	</div>
 
 {% endblock %}
-{% block javascripts %}
-	{{ encore_entry_script_tags('onglet') }}
-	<script type="text/javascript">
-		onglet();
-	</script>
-{% endblock %}
+

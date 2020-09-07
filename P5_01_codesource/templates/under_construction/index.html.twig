@@ -1,0 +1,17 @@
+{% extends "under_construction/base.html.twig" %}
+
+{% block title %}En cours de construction{% endblock %}
+
+{% block body %}
+<div class="jumbotron text-center">
+	<h1 class=" h2 my-5 text-center">En cours de développement</h1>
+    <img src="https://cdn.pixabay.com/photo/2018/08/17/13/14/heart-3612853_960_720.png" width="20%" alt="image sur le thème de l'autisme" >
+	<p class="lead">Bonjour et bienvenue à vous, sos-autisme propose un annuaire interactif regroupant les professionnels de l'autisme à travers la France entière.</p>
+	<hr class="my-3">
+	<p>Nous souhaitons enrichir notre base de données c'est pourquoi le site reste actuellement en développement, mais vous pouvez si vous êtes un professionnel de l'autisme vous inscrire dès maintenant.</p>
+	<p class="lead">
+		<a class="btn btn-info btn-md rounded" href="{{ path('homepage') }}" role="button"><i class="fas fa-eye"> Voir le site</i> </a>
+	</p>
+</div>
+
+{% endblock %}

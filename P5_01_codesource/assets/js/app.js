@@ -18,5 +18,6 @@ import $ from 'jquery';
 // inmportation des fichier js nécessaire
 import 'bootstrap';
 import './diaporama';
-import './onglet';
+import './btnScrollTop';
+
 
